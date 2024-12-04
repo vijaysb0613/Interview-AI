@@ -3,9 +3,9 @@ import { defineConfig } from 'drizzle-kit';
 
 export default defineConfig({
   out: './drizzle',
-  schema: './src/db/schema.ts',
+  schema: './utils/schema.js',
   dialect: 'postgresql',
   dbCredentials: {
-    url: process.env.NEXT_PUBLIC_DRIZZLE_DB_URL,
+    url: 'postgresql://Interview-AI_owner:cWudeoq6xhE3@ep-proud-smoke-a1pzsegd.ap-southeast-1.aws.neon.tech/Interview-AI?sslmode=require',
   },
 });
