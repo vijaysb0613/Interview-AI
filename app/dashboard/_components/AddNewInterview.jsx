@@ -12,6 +12,16 @@ import { Input} from "@/components/ui/input"
 import { Button } from "@/components/ui/button";
 function AddNewInterview() {
   const [OpenDialog, setOpenDialog] = useState(false);
+  const [JobPosition,setJobPosition] = useState();
+  const [JobDescription,setJobDescription] = useState();
+  const [JobExperience,setJobExperience] = useState();
+
+  const onSubmit=(e) =>
+  {
+    e.preventDefault()
+    console.log(JobPosition,JobDescription,JobExperience)
+  }
+
   return (
     <div>
       <div
@@ -28,7 +38,7 @@ function AddNewInterview() {
         <DialogContent>
           <DialogHeader>
             <DialogTitle>Are you absolutely sure?</DialogTitle>
-            <form action="">
+            <form onSubmit={onSubmit}>
             <div>
               <h2>Tell Us More About your Job </h2>
               <h2>
@@ -37,15 +47,18 @@ function AddNewInterview() {
               </h2>
               <div className="mt-7 my-2">
                 <label>Job Role/Jobe Positon</label>
-                <Input placeholder="EX. Full Stack Developer" required></Input>
+                <Input placeholder="EX. Full Stack Developer" required
+                onChange={(e)=>setJobPosition(e.target.value)}></Input>
               </div>
               <div className="mt-7 my-2">
                 <label>Job Description/Tech Stack (In Short)</label>
-                <Input placeholder="EX. React,Angular,Nodejs,MySQL" required></Input>
+                <Input placeholder="EX. React,Angular,Nodejs,MySQL" required 
+                 onChange={(e)=>setJobDescription(e.target.value)}></Input>
               </div>
               <div className="mt-7 my-2">
                 <label>Job Experience</label>
-                <Input placeholder="EX.5" type="number" max="50" required></Input>
+                <Input placeholder="EX.5" type="number" max="50" required 
+                 onChange={(e)=>setJobExperience(e.target.value)}></Input>
               </div>
             </div>
             <div className="flex gap-5 justify-end">
