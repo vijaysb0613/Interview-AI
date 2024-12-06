@@ -10,16 +10,44 @@ import {
 import { Input} from "@/components/ui/input"
 
 import { Button } from "@/components/ui/button";
+import { model } from "@/GeminiAIModal";
+
+
 function AddNewInterview() {
   const [OpenDialog, setOpenDialog] = useState(false);
   const [JobPosition,setJobPosition] = useState();
   const [JobDescription,setJobDescription] = useState();
   const [JobExperience,setJobExperience] = useState();
-
-  const onSubmit=(e) =>
+   const generationConfig = {
+    temperature: 1,
+    topP: 0.95,
+    topK: 40,
+    maxOutputTokens: 8192,
+    responseMimeType: "text/plain",
+  };
+  const onSubmit=async (e) =>
   {
     e.preventDefault()
     console.log(JobPosition,JobDescription,JobExperience)
+    
+    const InputPrompt ="Job Position:"+JobPosition+", Job Description: "+JobDescription+"Job Experience: "+JobExperience+", Depending On the given job Position,Job Description,Job Experinece give us a" +process.env.NEXT_PUBLIC_INTERVIEW_QUESTION_COUNT+"Interview Questions along with Answer in json format"
+    try{
+      async function run() {
+        const chatSession = model.startChat({
+          generationConfig,
+          history: [
+          ],
+        });
+      
+        const result = await chatSession.sendMessage(InputPrompt);
+        console.log(result.response.text());
+      }
+      
+      run();
+    }
+    catch (error) {
+      console.error("Error during model call:", error);
+    }
   }
 
   return (
