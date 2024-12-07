@@ -11,6 +11,7 @@ import { Input} from "@/components/ui/input"
 
 import { Button } from "@/components/ui/button";
 import { model } from "@/GeminiAIModal";
+import { LoaderCircle } from "lucide-react";
 
 
 function AddNewInterview() {
@@ -18,6 +19,7 @@ function AddNewInterview() {
   const [JobPosition,setJobPosition] = useState();
   const [JobDescription,setJobDescription] = useState();
   const [JobExperience,setJobExperience] = useState();
+  const[loading,setLoading]=useState(false)
    const generationConfig = {
     temperature: 1,
     topP: 0.95,
@@ -26,7 +28,9 @@ function AddNewInterview() {
     responseMimeType: "text/plain",
   };
   const onSubmit=async (e) =>
+
   {
+    setLoading(true);
     e.preventDefault()
     console.log(JobPosition,JobDescription,JobExperience)
     
@@ -40,10 +44,13 @@ function AddNewInterview() {
         });
       
         const result = await chatSession.sendMessage(InputPrompt);
-        console.log(result.response.text());
+        const MockJsonResp=(result.response.text()).replace('```json','').replace('```','')
+        console.log(JSON.parse(MockJsonResp));
+        setLoading(false);
       }
       
       run();
+    
     }
     catch (error) {
       console.error("Error during model call:", error);
@@ -93,7 +100,9 @@ function AddNewInterview() {
               <Button type="button" variant="ghost" onClick={() => setOpenDialog(false)}>
                 Cancel
               </Button>
-              <Button type="submit">Start Inteview</Button>
+              <Button type="submit" disabled={loading}>
+              {loading?<> <LoaderCircle className="animate-spin"/> 'Generating from AI'</>:'Start Interview'}
+              </Button>
             </div>
             </form>
           </DialogHeader>
