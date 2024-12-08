@@ -12,6 +12,7 @@ import { Input} from "@/components/ui/input"
 import { Button } from "@/components/ui/button";
 import { model } from "@/GeminiAIModal";
 import { LoaderCircle } from "lucide-react";
+import { MockInterview } from "@/utils/schema";
 
 
 function AddNewInterview() {
@@ -19,7 +20,8 @@ function AddNewInterview() {
   const [JobPosition,setJobPosition] = useState();
   const [JobDescription,setJobDescription] = useState();
   const [JobExperience,setJobExperience] = useState();
-  const[loading,setLoading]=useState(false)
+  const[loading,setLoading]=useState(false);
+  const[JsonRespons,setJsonRespons]=useState([]);
    const generationConfig = {
     temperature: 1,
     topP: 0.95,
@@ -46,7 +48,11 @@ function AddNewInterview() {
         const result = await chatSession.sendMessage(InputPrompt);
         const MockJsonResp=(result.response.text()).replace('```json','').replace('```','')
         console.log(JSON.parse(MockJsonResp));
+        setJsonRespons(MockJsonResp)
         setLoading(false);
+
+       const resp=await db.insert(MockInterview).values({})
+
       }
       
       run();
