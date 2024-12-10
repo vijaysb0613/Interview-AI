@@ -13,7 +13,10 @@ import { Button } from "@/components/ui/button";
 import { model } from "@/GeminiAIModal";
 import { LoaderCircle } from "lucide-react";
 import { MockInterview } from "@/utils/schema";
-
+import {v4 as uuidv4} from 'uuid';
+import { useUser } from "@clerk/nextjs";
+import moment from "moment/moment";
+import { db } from "@/utils/db";
 
 function AddNewInterview() {
   const [OpenDialog, setOpenDialog] = useState(false);
@@ -22,6 +25,7 @@ function AddNewInterview() {
   const [JobExperience,setJobExperience] = useState();
   const[loading,setLoading]=useState(false);
   const[JsonRespons,setJsonRespons]=useState([]);
+  const {user} =useUser();
    const generationConfig = {
     temperature: 1,
     topP: 0.95,
@@ -49,9 +53,20 @@ function AddNewInterview() {
         const MockJsonResp=(result.response.text()).replace('```json','').replace('```','')
         console.log(JSON.parse(MockJsonResp));
         setJsonRespons(MockJsonResp)
-        setLoading(false);
+        
+       const resp=await db.insert(MockInterview).values({
+        mockId:uuidv4(), 
+        jsonMockResp:MockJsonResp,
+        jobPosition:JobPosition,
+        jobDesc:JobDescription,
+        jobExperience:JobExperience,
+        createdBy:user.primaryEmailAddress?.emailAddress,
+        createdAt:moment().format('DD-MM-yyyy')
+      
+       }).returning({mockiId:MockInterview.mockId})
 
-       const resp=await db.insert(MockInterview).values({})
+       console.log("Inserted ID: ",resp)
+       setLoading(false);
 
       }
       
