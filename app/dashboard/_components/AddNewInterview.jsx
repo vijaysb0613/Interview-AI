@@ -66,6 +66,10 @@ function AddNewInterview() {
        }).returning({mockiId:MockInterview.mockId})
 
        console.log("Inserted ID: ",resp)
+       if(resp)
+       {
+        setOpenDialog(false);
+       }
        setLoading(false);
 
       }
