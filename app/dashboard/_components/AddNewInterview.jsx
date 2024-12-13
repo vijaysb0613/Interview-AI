@@ -3,20 +3,20 @@ import React, { useState } from "react";
 import {
   Dialog,
   DialogContent,
-  DialogDescription,
   DialogHeader,
   DialogTitle,
-} from "@/components/ui/dialog";
-import { Input} from "@/components/ui/input"
+} from "../../../components/ui/dialog";
+import { Input} from "../../../components/ui/input"
 
-import { Button } from "@/components/ui/button";
-import { model } from "@/GeminiAIModal";
+import { Button } from "../../../components/ui/button";
+import { model } from "../../../GeminiAIModal";
 import { LoaderCircle } from "lucide-react";
-import { MockInterview } from "@/utils/schema";
+import { MockInterview } from "../../../utils/schema";
 import {v4 as uuidv4} from 'uuid';
 import { useUser } from "@clerk/nextjs";
 import moment from "moment/moment";
-import { db } from "@/utils/db";
+import { db } from "../../../utils/db";
+import { useRouter } from "next/navigation";
 
 function AddNewInterview() {
   const [OpenDialog, setOpenDialog] = useState(false);
@@ -25,6 +25,7 @@ function AddNewInterview() {
   const [JobExperience,setJobExperience] = useState();
   const[loading,setLoading]=useState(false);
   const[JsonRespons,setJsonRespons]=useState([]);
+  const router=useRouter();
   const {user} =useUser();
    const generationConfig = {
     temperature: 1,
@@ -69,6 +70,7 @@ function AddNewInterview() {
        if(resp)
        {
         setOpenDialog(false);
+        router.push('/dashboard/interview/'+resp[0]?.mockiId)
        }
        setLoading(false);
 
