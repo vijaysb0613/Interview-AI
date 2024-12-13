@@ -6,6 +6,7 @@ import { eq } from 'drizzle-orm'
 import Webcam from 'react-webcam'
 import { WebcamIcon } from 'lucide-react'
 
+import { Button } from '../../../../components/ui/button'
 function Interview({params}) {
   const[interviewData,setInterviewData]=useState([]);
   const[webCamEnabled,setWebCamEnabled]=useState(false);
@@ -30,7 +31,11 @@ function Interview({params}) {
           height:300,
           width:300
         }}/>:
-        <WebcamIcon className='h-72 w-full my-7 p-20 bg-blue-200 rounded-md border'  />}
+        <>
+        <WebcamIcon className='h-72 w-full my-7 p-20 bg-blue-200 rounded-md border'  />
+        <Button onClick={()=>setWebCamEnabled(true)} variant="outline">Enable WebCam And Microphone</Button>
+        </>
+}
       </div>
     </div>
   )
