@@ -30,12 +30,17 @@ function Interview({params}) {
         style={{
           height:300,
           width:300
-        }}/>:
+        }}
+        mirrored={true}/>:
         <>
         <WebcamIcon className='h-72 w-full my-7 p-20 bg-blue-200 rounded-md border'  />
         <Button onClick={()=>setWebCamEnabled(true)} variant="outline">Enable WebCam And Microphone</Button>
         </>
+
 }
+      </div>
+      <div>
+        <h2><strong></strong></h2>
       </div>
     </div>
   )
