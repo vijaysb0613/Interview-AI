@@ -7,6 +7,7 @@ import Webcam from 'react-webcam'
 import { WebcamIcon } from 'lucide-react'
 
 import { Button } from '../../../../components/ui/button'
+import { useParams } from 'next/navigation'
 function Interview({params}) {
   const[interviewData,setInterviewData]=useState([]);
   const[webCamEnabled,setWebCamEnabled]=useState(false);
@@ -14,9 +15,10 @@ function Interview({params}) {
   {
     GetInterviewData();
   },[])
+  const interviewId=useParams()
   const GetInterviewData = async() =>
   {
-    const result=await db.select().from(MockInterview).where(eq(MockInterview.mockId,params.interviewId))
+    const result=await db.select().from(MockInterview).where(eq(MockInterview.mockId,interviewId))
     console.log(result)
     setInterviewData(result)
   }
@@ -40,7 +42,7 @@ function Interview({params}) {
 }
       </div>
       <div>
-        <h2><strong></strong></h2>
+        <h2><strong>Job Role/Position:</strong>{interviewData.jobPosition}</h2>
       </div>
     </div>
   )
