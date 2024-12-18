@@ -7,6 +7,7 @@ import Webcam from 'react-webcam'
 import { Lightbulb, WebcamIcon } from 'lucide-react'
 import { Button } from '../../../../components/ui/button'
 import { useParams } from 'next/navigation'
+import Link from 'next/link'
 function Interview({params}) {
   const[interviewData,setInterviewData]=useState([]);
   const[webCamEnabled,setWebCamEnabled]=useState(false);
@@ -63,7 +64,10 @@ function Interview({params}) {
 
       </div>
       <div className='flex justify-end items-end'>
+      <Link
+      href={`/dashboard/interview/${interviewId}/start`}>
       <Button>Start Interview</Button>
+      </Link>
       </div>
      
    
