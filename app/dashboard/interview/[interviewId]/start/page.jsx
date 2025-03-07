@@ -5,7 +5,7 @@ import { useParams } from "next/navigation";
 import { MockInterview } from "../../../../../utils/schema";
 import { eq } from "drizzle-orm";
 import QuestionSection from "./_components/QuestionSection";
-
+import RecordAnswerSection from "./_components/RecordAnswerSection";
 function StartInterview() {
   const [interviewData, setInterviewData] = useState(null);
   const [MockInterviewQuestion, setMockInterviewQuestion] = useState([]);
@@ -40,13 +40,21 @@ function StartInterview() {
   };
 
   return (
-    <div>
-      <div className="grid grid-cols-1 md:grid-cols-2">
-        <QuestionSection 
+    <div className="flex flex-row gap-5">
+    {/* Left Section - Questions */}
+    <div className="w-full md:w-1/2">
+      <QuestionSection 
         activeQuestionIndex={activeQuestionIndex}
-        MockInterviewQuestion={MockInterviewQuestion} />
-      </div>
+        MockInterviewQuestion={MockInterviewQuestion} 
+      />
     </div>
+  
+    {/* Right Section - Answer Recording */}
+    <div className="w-full md:w-1/2">
+      <RecordAnswerSection />
+    </div>
+  </div>
+  
   );
 }
 
