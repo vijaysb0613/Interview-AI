@@ -42,7 +42,7 @@ results.map((result)=>{setUserAnswer(prevAns=>prevAns+result?.transcript)})
         onClick={isRecording?stopSpeechToText:startSpeechToText}>
         {isRecording ?
         <h2 className='text-red-600'>
-          <Mic /> 'Recording...'
+          <Mic /> Stop Recording
         </h2>
         :
         'Record Answer'
