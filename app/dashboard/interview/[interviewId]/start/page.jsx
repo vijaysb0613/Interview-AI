@@ -51,7 +51,9 @@ function StartInterview() {
   
     {/* Right Section - Answer Recording */}
     <div className="w-full md:w-1/2">
-      <RecordAnswerSection />
+      <RecordAnswerSection
+        activeQuestionIndex={activeQuestionIndex}
+        MockInterviewQuestion={MockInterviewQuestion} />
     </div>
   </div>
   

@@ -6,8 +6,17 @@ import { Button } from '../../../../../../components/ui/button'
 import useSpeechToText from 'react-hook-speech-to-text';
 import { Heading2, Mic } from 'lucide-react'
 import { toast } from 'sonner'
+import { model } from "../../../../../../GeminiAIModal";
 
-function RecordAnswerSection() {
+
+function RecordAnswerSection({activeQuestionIndex,MockInterviewQuestion}) {
+  const generationConfig = {
+    temperature: 1,
+    topP: 0.95,
+    topK: 40,
+    maxOutputTokens: 8192,
+    responseMimeType: "text/plain",
+  };
   const {
     error,
     interimResult,
@@ -20,7 +29,12 @@ function RecordAnswerSection() {
     useLegacyResults: false
   });
    const[userAnswer,setUserAnswer]= useState("")
-  const SvaeUserAnswer = ()=>{
+  const SvaeUserAnswer = async ()=>{
+    const chatSession = model.startChat({
+      generationConfig,
+      history: [
+      ],
+    });
     if(isRecording)
     {
       stopSpeechToText();
@@ -28,6 +42,10 @@ function RecordAnswerSection() {
       {
         toast("Error While Saving please record again");
       }
+      const FeedBackPrompt = "Question:"+MockInterviewQuestion[activeQuestionIndex]?.question+", UserAnser:"+userAnswer+"Depending on the given Question And User Answer give a rating for 10 and feedback of improvement in 3 to 5 lines in json format with rating field and feedback field";
+      const result = await chatSession.sendMessage(FeedBackPrompt);
+      const mockJsonResponse=(result.response.text()).replace('```json','').replace('```','');
+      console.log(mockJsonResponse); 
     }
     else
     {
