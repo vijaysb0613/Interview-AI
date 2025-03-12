@@ -5,6 +5,7 @@ import Image from 'next/image'
 import { Button } from '../../../../../../components/ui/button'
 import useSpeechToText from 'react-hook-speech-to-text';
 import { Heading2, Mic } from 'lucide-react'
+import { toast } from 'sonner'
 
 function RecordAnswerSection() {
   const {
@@ -19,7 +20,20 @@ function RecordAnswerSection() {
     useLegacyResults: false
   });
    const[userAnswer,setUserAnswer]= useState("")
-
+  const SvaeUserAnswer = ()=>{
+    if(isRecording)
+    {
+      stopSpeechToText();
+      if(userAnswer?.length<10)
+      {
+        toast("Error While Saving please record again");
+      }
+    }
+    else
+    {
+      startSpeechToText();
+    }
+  }
   useEffect(()=>{
 results.map((result)=>{setUserAnswer(prevAns=>prevAns+result?.transcript)})
   },[results])
@@ -39,7 +53,7 @@ results.map((result)=>{setUserAnswer(prevAns=>prevAns+result?.transcript)})
          }} />  
         </div>
         <Button variant="outline"
-        onClick={isRecording?stopSpeechToText:startSpeechToText}>
+        onClick={SvaeUserAnswer}>
         {isRecording ?
         <h2 className='text-red-600'>
           <Mic /> Stop Recording
