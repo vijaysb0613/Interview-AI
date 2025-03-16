@@ -63,10 +63,11 @@ function StartInterview() {
     <div className="relative flex flex-col items-center w-full p-6">
       <div className="flex flex-col md:flex-row gap-8 w-full max-w-5xl">
         <div className="md:w-1/2 w-full bg-white p-4 rounded-lg shadow-md">
-          <QuestionSection
-            activeQuestionIndex={activeQuestionIndex}
-            MockInterviewQuestion={MockInterviewQuestion}
-          />
+        <QuestionSection
+  activeQuestionIndex={activeQuestionIndex}
+  MockInterviewQuestion={MockInterviewQuestion}
+  onSelectQuestion={setActiveQuestionIndex} // <-- Pass the function
+/>
         </div>
   
         {/* Right Section - Answer Recording (Includes Buttons) */}
@@ -92,9 +93,9 @@ function StartInterview() {
             <Button onClick={() => setActiveQuestionIndex(activeQuestionIndex + 1)}>
               Next
             </Button>
-            <Button variant="destructive">
+            {activeQuestionIndex==MockInterviewQuestion?.length-1 &&<Button variant="destructive">
               End Interview
-            </Button>
+            </Button>}
           </div>
         </div>
       </div>

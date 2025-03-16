@@ -1,23 +1,19 @@
 import { Lightbulb, Volume2 } from "lucide-react";
 import React from "react";
 
-function QuestionSection({ MockInterviewQuestion, activeQuestionIndex }) {
+function QuestionSection({ MockInterviewQuestion, activeQuestionIndex, onSelectQuestion }) {
   console.log("Received MockInterviewQuestion:", MockInterviewQuestion);
   console.log("Active Index:", activeQuestionIndex);
- 
-  
 
-  const TextToSpeech=(text)=>{
-    if('speechSynthesis' in window){
+  const TextToSpeech = (text) => {
+    if ("speechSynthesis" in window) {
       const speech = new SpeechSynthesisUtterance(text);
-      window.speechSynthesis.speak(speech)
+      window.speechSynthesis.speak(speech);
+    } else {
+      alert("Sorry, Your Browser does not support text to speech");
     }
-    else
-    {
-      alert("Sorry, Your Browser does not suppoer text to speech");
-    }
+  };
 
-  }
   return (
     MockInterviewQuestion && (
       <div className="p-5 border rounded-lg mt-10 space-y-5">
@@ -31,6 +27,7 @@ function QuestionSection({ MockInterviewQuestion, activeQuestionIndex }) {
                   ? "bg-orange-500 text-white shadow-lg scale-105"
                   : "bg-secondary text-gray-900 hover:bg-gray-200"
               }`}
+              onClick={() => onSelectQuestion(index)}
             >
               Question #{index + 1}
             </div>
@@ -40,10 +37,14 @@ function QuestionSection({ MockInterviewQuestion, activeQuestionIndex }) {
         {/* Selected Question Display */}
         <div className="text-center">
           <h2 className="text-lg font-medium text-gray-800">
-            {MockInterviewQuestion[activeQuestionIndex]?.question ||
-              "Select a question to view"}
+            {MockInterviewQuestion[activeQuestionIndex]?.question || "Select a question to view"}
           </h2>
-          <Volume2 onClick={()=>TextToSpeech(MockInterviewQuestion[activeQuestionIndex]?.question)} className="cursor-pointer"/>
+          {activeQuestionIndex !== null && (
+            <Volume2
+              onClick={() => TextToSpeech(MockInterviewQuestion[activeQuestionIndex]?.question)}
+              className="cursor-pointer inline-block ml-2"
+            />
+          )}
         </div>
 
         {/* Note Section */}
