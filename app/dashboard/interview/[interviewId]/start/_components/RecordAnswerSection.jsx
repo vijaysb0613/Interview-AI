@@ -126,7 +126,6 @@ function RecordAnswerSection({
           "Record Answer"
         )}
       </Button>
-      <Button onClick={console.log(userAnswer)}>Show Answer</Button>
     </div>
   );
 }

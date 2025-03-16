@@ -19,15 +19,15 @@ const {
     responseMimeType: "text/plain",
   };
   
-  async function run() {
-    const chatSession = model.startChat({
-      generationConfig,
-      history: [
-      ],
-    });
+  // async function run() {
+  //   const chatSession = model.startChat({
+  //     generationConfig,
+  //     history: [
+  //     ],
+  //   });
   
-    const result = await chatSession.sendMessage("INSERT_INPUT_HERE");
-    console.log(result.response.text());
-  }
+     // const result = await chatSession.sendMessage("INSERT_INPUT_HERE");
+    // console.log(result.response.text());
+  // }
   
-  run();
+  // run();

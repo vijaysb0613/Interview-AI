@@ -6,6 +6,7 @@ import { MockInterview } from "../../../../../utils/schema";
 import { eq } from "drizzle-orm";
 import QuestionSection from "./_components/QuestionSection";
 import RecordAnswerSection from "./_components/RecordAnswerSection";
+import { Button } from "../../../../../components/ui/button";
 
 function StartInterview() {
   const [interviewData, setInterviewData] = useState(null);
@@ -59,29 +60,48 @@ function StartInterview() {
   }, [interviewData]);
 
   return (
-    <div className="flex flex-row gap-5">
-      {/* Left Section - Questions */}
-      <div className="w-full md:w-1/2">
-        <QuestionSection
-          activeQuestionIndex={activeQuestionIndex}
-          MockInterviewQuestion={MockInterviewQuestion}
-        />
-      </div>
-
-      {/* Right Section - Answer Recording */}
-      <div className="w-full md:w-1/2">
-        {!loading && interviewData ? (
-          <RecordAnswerSection
+    <div className="relative flex flex-col items-center w-full p-6">
+      <div className="flex flex-col md:flex-row gap-8 w-full max-w-5xl">
+        <div className="md:w-1/2 w-full bg-white p-4 rounded-lg shadow-md">
+          <QuestionSection
             activeQuestionIndex={activeQuestionIndex}
             MockInterviewQuestion={MockInterviewQuestion}
-            interviewData={interviewData}
           />
-        ) : (
-          <p>Loading interview data...</p>
-        )}
+        </div>
+  
+        {/* Right Section - Answer Recording (Includes Buttons) */}
+        <div className="md:w-1/2 w-full bg-white p-4 rounded-lg shadow-md flex flex-col items-center">
+          {!loading && interviewData ? (
+            <RecordAnswerSection
+              activeQuestionIndex={activeQuestionIndex}
+              MockInterviewQuestion={MockInterviewQuestion}
+              interviewData={interviewData}
+              setActiveQuestionIndex={setActiveQuestionIndex}
+            />
+          ) : (
+            <p className="text-center">Loading interview data...</p>
+          )}
+  
+          {/* Buttons - Centered Under Webcam with Top Margin */}
+          <div className="mt-6 flex justify-center gap-3">
+            {activeQuestionIndex > 0 && (
+              <Button onClick={() => setActiveQuestionIndex(activeQuestionIndex - 1)}>
+                Previous
+              </Button>
+            )}
+            <Button onClick={() => setActiveQuestionIndex(activeQuestionIndex + 1)}>
+              Next
+            </Button>
+            <Button variant="destructive">
+              End Interview
+            </Button>
+          </div>
+        </div>
       </div>
     </div>
   );
+  
+  
 }
 
 export default StartInterview;

@@ -4,7 +4,8 @@ import React from "react";
 function QuestionSection({ MockInterviewQuestion, activeQuestionIndex }) {
   console.log("Received MockInterviewQuestion:", MockInterviewQuestion);
   console.log("Active Index:", activeQuestionIndex);
-
+ 
+  
 
   const TextToSpeech=(text)=>{
     if('speechSynthesis' in window){
