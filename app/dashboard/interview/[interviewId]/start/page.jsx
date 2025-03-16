@@ -53,7 +53,8 @@ function StartInterview() {
     <div className="w-full md:w-1/2">
       <RecordAnswerSection
         activeQuestionIndex={activeQuestionIndex}
-        MockInterviewQuestion={MockInterviewQuestion} />
+        MockInterviewQuestion={MockInterviewQuestion}
+        interviewData={interviewData} />
     </div>
   </div>
   
