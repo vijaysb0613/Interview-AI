@@ -10,10 +10,12 @@ import {
   CollapsibleTrigger,
 } from "../../../../../@/components/ui/collapsible";
 import { ChevronsUpDown } from "lucide-react";
+import { useRouter } from "next/navigation";
+import { Button } from "../../../../../components/ui/button";
 function Feedback() {
   const params = useParams(); // Unwrap params correctly
   const [feedback, setFeedback] = useState([]);
-
+  const router=useRouter();  
   useEffect(() => {
     const fetchFeedback = async () => {
       if (!params?.interviewId) return; // Ensure interviewId exists
@@ -62,7 +64,7 @@ function Feedback() {
           <p className="text-gray-500">No feedback available.</p>
         )}
       </div>
-     <Button>Go Home</Button>
+     <Button onClick={()=>router.replace('/dashboard')}>Go Home</Button>
     </div>
   );
 }
