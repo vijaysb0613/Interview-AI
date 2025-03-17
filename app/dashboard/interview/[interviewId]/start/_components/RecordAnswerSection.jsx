@@ -30,6 +30,7 @@ function RecordAnswerSection({
     interimResult,
     isRecording,
     results,
+    setResults,
     startSpeechToText,
     stopSpeechToText,
   } = useSpeechToText({
@@ -92,8 +93,10 @@ function RecordAnswerSection({
     });
     if (resp) {
       toast("User Answer Recorded Sucessfully");
+      setUserAnswer("");
+      setResults([]);
     }
-    setUserAnswer("");
+    setResults([]);
     setLoading(false);
   };
 
