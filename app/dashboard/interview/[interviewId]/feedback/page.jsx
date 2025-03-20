@@ -61,7 +61,7 @@ function Feedback() {
             </Collapsible>
           ))
         ) : (
-          <p className="text-gray-500">No feedback available.</p>
+          <p className="text-gray-500 text-bold text-xl mb-5">No feedback available.</p>
         )}
       </div>
      <Button onClick={()=>router.replace('/dashboard')}>Go Home</Button>

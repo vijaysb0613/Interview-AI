@@ -9,6 +9,12 @@ function InterviewItemCard({interview}) {
         // console.log(interview.mockId);
         router.push("/dashboard/interview/"+interview?.mockId+"/start")
     }
+
+    const onFeedback=()=>
+        {
+            // console.log(interview.mockId);
+            router.push("/dashboard/interview/"+interview?.mockId+"/feedback")
+        }
   return (
     <div className='border shadow-sm rounded-lg p-3'>
         
@@ -19,7 +25,7 @@ function InterviewItemCard({interview}) {
     <div className='flex justify-between my-2 mt-2 gap-5'>
        
        
-        <Button size="sm" variant="outline" className="w-full" >
+        <Button size="sm" variant="outline" className="w-full" onClick={onFeedback}>
             Feedback
         </Button>
         <Button className="w-full" onClick={onStart}>
