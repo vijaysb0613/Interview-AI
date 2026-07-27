@@ -1,8 +1,7 @@
-"use client"
 import React from 'react'
 import AddNewInterview from './_components/AddNewInterview'
 import InterviewList from './_components/InterviewList'
-function dashboard() {
+function Dashboard() {
   return (
     <div>
       <h2 className='font-bold text-2xl'>Dashboard</h2>
@@ -13,10 +12,10 @@ function dashboard() {
       </div>
       {/* Previous interview*/}
 
-      
+
       <InterviewList />
     </div>
   )
 }
 
-export default dashboard
+export default Dashboard

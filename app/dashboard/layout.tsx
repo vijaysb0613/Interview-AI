@@ -1,7 +1,6 @@
-"use client"
-import React from 'react'
+import React, { ReactNode } from 'react'
 import Header from './_components/Header'
-function Dashboardlayout({children}) {
+function DashboardLayout({ children }: { children: ReactNode }) {
   return (
     <div>
     <Header />
@@ -12,4 +11,4 @@ function Dashboardlayout({children}) {
   )
 }
 
-export default Dashboardlayout
+export default DashboardLayout

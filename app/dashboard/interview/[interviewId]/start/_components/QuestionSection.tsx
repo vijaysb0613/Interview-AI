@@ -1,13 +1,9 @@
 import { Lightbulb, Volume2 } from "lucide-react";
 import React from "react";
-
-interface MockInterviewQuestionItem {
-  question: string;
-  answer?: string;
-}
+import type { InterviewQuestion } from "../../../../../../lib/ai/schemas";
 
 interface QuestionSectionProps {
-  MockInterviewQuestion: MockInterviewQuestionItem[];
+  MockInterviewQuestion: InterviewQuestion[];
   activeQuestionIndex: number;
   onSelectQuestion: (index: number) => void;
 }
