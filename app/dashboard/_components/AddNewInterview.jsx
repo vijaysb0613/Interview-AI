@@ -128,7 +128,7 @@ function AddNewInterview() {
                 Cancel
               </Button>
               <Button type="submit" disabled={loading}>
-              {loading?<> <LoaderCircle className="animate-spin"/> 'Generating from AI'</>:'Start Interview'}
+              {loading?<> <LoaderCircle className="animate-spin"/> Generating from AI</>:'Start Interview'}
               </Button>
             </div>
             </form>
