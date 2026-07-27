@@ -1,6 +1,6 @@
 import { Lightbulb, Volume2 } from "lucide-react";
 import React from "react";
-import type { InterviewQuestion } from "../../../../../../lib/ai/schemas";
+import type { InterviewQuestion } from "@/lib/ai/schemas";
 
 interface QuestionSectionProps {
   MockInterviewQuestion: InterviewQuestion[];

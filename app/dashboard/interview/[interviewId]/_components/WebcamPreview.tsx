@@ -2,7 +2,7 @@
 import React, { useState } from "react"
 import Webcam from "react-webcam"
 import { WebcamIcon } from "lucide-react"
-import { Button } from "../../../../../components/ui/button"
+import { Button } from "@/components/ui/button"
 
 export default function WebcamPreview() {
   const [webCamEnabled, setWebCamEnabled] = useState(false)

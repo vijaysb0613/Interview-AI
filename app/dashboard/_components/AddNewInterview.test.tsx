@@ -16,7 +16,7 @@ vi.mock("sonner", () => ({
   toast: { error: toastErrorMock, success: vi.fn() },
 }));
 
-vi.mock("../../../actions/interview-actions", () => ({
+vi.mock("@/actions/interview-actions", () => ({
   createInterviewAction: createInterviewActionMock,
 }));
 

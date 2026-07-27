@@ -2,12 +2,12 @@
 import React, { useEffect, useState, useTransition } from "react";
 import Webcam from "react-webcam";
 import Image from "next/image";
-import { Button } from "../../../../../../components/ui/button";
+import { Button } from "@/components/ui/button";
 import useSpeechToText from "react-hook-speech-to-text";
 import { Mic } from "lucide-react";
 import { toast } from "sonner";
-import { submitAnswerAction } from "../../../../../../actions/answer-actions";
-import type { InterviewQuestion } from "../../../../../../lib/ai/schemas";
+import { submitAnswerAction } from "@/actions/answer-actions";
+import type { InterviewQuestion } from "@/lib/ai/schemas";
 
 interface RecordAnswerSectionProps {
   activeQuestionIndex: number;

@@ -1,6 +1,6 @@
 import { notFound } from "next/navigation";
-import { getInterviewByMockId } from "../../../../../lib/db/queries/interviews";
-import { interviewQuestionsResponseSchema } from "../../../../../lib/ai/schemas";
+import { getInterviewByMockId } from "@/lib/db/queries/interviews";
+import { interviewQuestionsResponseSchema } from "@/lib/ai/schemas";
 import StartInterviewClient from "./_components/StartInterviewClient";
 
 async function StartInterview({ params }: { params: Promise<{ interviewId: string }> }) {

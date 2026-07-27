@@ -4,11 +4,11 @@ import {
   Collapsible,
   CollapsibleContent,
   CollapsibleTrigger,
-} from "../../../../../components/ui/collapsible";
+} from "@/components/ui/collapsible";
 import { ChevronsUpDown } from "lucide-react";
-import { Button } from "../../../../../components/ui/button";
-import { getAnswersForInterview } from "../../../../../lib/db/queries/answers";
-import { computeOverallRating } from "../../../../../lib/feedback";
+import { Button } from "@/components/ui/button";
+import { getAnswersForInterview } from "@/lib/db/queries/answers";
+import { computeOverallRating } from "@/lib/feedback";
 
 async function Feedback({ params }: { params: Promise<{ interviewId: string }> }) {
   const { interviewId } = await params;

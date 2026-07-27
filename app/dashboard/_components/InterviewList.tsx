@@ -1,5 +1,5 @@
 import { currentUser } from "@clerk/nextjs/server";
-import { getInterviewsForUser } from "../../../lib/db/queries/interviews";
+import { getInterviewsForUser } from "@/lib/db/queries/interviews";
 import InterviewItemCard from "./InterviewItemCard";
 
 async function InterviewList() {

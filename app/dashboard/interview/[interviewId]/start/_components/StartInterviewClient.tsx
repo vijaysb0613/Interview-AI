@@ -1,11 +1,16 @@
 "use client";
 import React, { useState } from "react";
+import dynamic from "next/dynamic";
 import { ErrorBoundary } from "react-error-boundary";
 import QuestionSection from "./QuestionSection";
-import RecordAnswerSection from "./RecordAnswerSection";
-import { Button } from "../../../../../../components/ui/button";
+import { Button } from "@/components/ui/button";
 import Link from "next/link";
-import type { InterviewQuestion } from "../../../../../../lib/ai/schemas";
+import type { InterviewQuestion } from "@/lib/ai/schemas";
+
+// react-hook-speech-to-text reads `window`/`navigator` at module load time,
+// unconditionally - it crashes if evaluated during SSR, so this component
+// must be excluded from the server bundle entirely, not just marked "use client".
+const RecordAnswerSection = dynamic(() => import("./RecordAnswerSection"), { ssr: false });
 
 interface StartInterviewClientProps {
   interviewData: {
