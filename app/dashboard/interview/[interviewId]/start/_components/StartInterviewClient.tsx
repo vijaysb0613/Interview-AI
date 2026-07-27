@@ -1,5 +1,6 @@
 "use client";
 import React, { useState } from "react";
+import { ErrorBoundary } from "react-error-boundary";
 import QuestionSection from "./QuestionSection";
 import RecordAnswerSection from "./RecordAnswerSection";
 import { Button } from "../../../../../../components/ui/button";
@@ -32,11 +33,21 @@ export default function StartInterviewClient({ interviewData, questions }: Start
 
         {/* Right Section - Answer Recording (Includes Buttons) */}
         <div className="md:w-1/2 w-full bg-white p-4 rounded-lg shadow-md flex flex-col items-center">
-          <RecordAnswerSection
-            activeQuestionIndex={activeQuestionIndex}
-            MockInterviewQuestion={questions}
-            interviewData={interviewData}
-          />
+          <ErrorBoundary
+            resetKeys={[activeQuestionIndex]}
+            fallback={
+              <p className="text-red-600 text-center p-4">
+                Something went wrong with the webcam or microphone. Please check your browser
+                permissions and refresh the page.
+              </p>
+            }
+          >
+            <RecordAnswerSection
+              activeQuestionIndex={activeQuestionIndex}
+              MockInterviewQuestion={questions}
+              interviewData={interviewData}
+            />
+          </ErrorBoundary>
 
           {/* Buttons - Centered Under Webcam with Top Margin */}
           <div className="mt-6 flex justify-center gap-3">

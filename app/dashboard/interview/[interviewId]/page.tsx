@@ -1,6 +1,7 @@
 import React from 'react'
 import { notFound } from 'next/navigation'
 import { Lightbulb } from 'lucide-react'
+import { ErrorBoundary } from 'react-error-boundary'
 import { Button } from '../../../../components/ui/button'
 import Link from 'next/link'
 import { getInterviewByMockId } from '../../../../lib/db/queries/interviews'
@@ -36,7 +37,16 @@ async function Interview({ params }: { params: Promise<{ interviewId: string }> 
         </div>
       </div>
       <div>
-        <WebcamPreview />
+        <ErrorBoundary
+          fallback={
+            <p className="text-red-600 text-center p-4">
+              Something went wrong with the webcam. Please check your browser permissions and
+              refresh the page.
+            </p>
+          }
+        >
+          <WebcamPreview />
+        </ErrorBoundary>
       </div>
 
       </div>

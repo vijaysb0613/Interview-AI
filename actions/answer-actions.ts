@@ -6,6 +6,7 @@ import { generateJson } from "@/lib/ai/gemini";
 import { buildFeedbackPrompt } from "@/lib/ai/prompts";
 import { feedbackResponseSchema } from "@/lib/ai/schemas";
 import { createAnswer } from "@/lib/db/queries/answers";
+import { logger } from "@/lib/logger";
 
 const submitAnswerInputSchema = z.object({
   mockId: z.string().uuid(),
@@ -46,7 +47,7 @@ export async function submitAnswerAction(
     const raw = await generateJson(prompt);
     feedback = feedbackResponseSchema.parse(raw);
   } catch (error) {
-    console.error("[submitAnswerAction] feedback generation failed", error);
+    logger.error("submitAnswerAction: feedback generation failed", error, { userId });
     return { status: "error", message: "Failed to grade your answer. Please try again." };
   }
 
@@ -62,7 +63,7 @@ export async function submitAnswerAction(
     });
     return { status: "success" };
   } catch (error) {
-    console.error("[submitAnswerAction] failed to save answer", error);
+    logger.error("submitAnswerAction: failed to save answer", error, { userId });
     return { status: "error", message: "Failed to save your answer. Please try again." };
   }
 }

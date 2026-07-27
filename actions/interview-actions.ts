@@ -6,6 +6,7 @@ import { generateJson } from "@/lib/ai/gemini";
 import { buildQuestionPrompt } from "@/lib/ai/prompts";
 import { interviewQuestionsResponseSchema } from "@/lib/ai/schemas";
 import { createInterview } from "@/lib/db/queries/interviews";
+import { logger } from "@/lib/logger";
 
 const QUESTION_COUNT = Number(process.env.NEXT_PUBLIC_INTERVIEW_QUESTION_COUNT) || 5;
 
@@ -45,7 +46,7 @@ export async function createInterviewAction(input: {
     const raw = await generateJson(prompt);
     questions = interviewQuestionsResponseSchema.parse(raw);
   } catch (error) {
-    console.error("[createInterviewAction] question generation failed", error);
+    logger.error("createInterviewAction: question generation failed", error, { userId });
     return { status: "error", message: "Failed to generate interview questions. Please try again." };
   }
 
@@ -62,7 +63,7 @@ export async function createInterviewAction(input: {
     }
     return { status: "success", mockId: row.mockId };
   } catch (error) {
-    console.error("[createInterviewAction] failed to save interview", error);
+    logger.error("createInterviewAction: failed to save interview", error, { userId });
     return { status: "error", message: "Failed to save the interview. Please try again." };
   }
 }
