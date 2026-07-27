@@ -8,18 +8,13 @@ import {
 import { ChevronsUpDown } from "lucide-react";
 import { Button } from "../../../../../components/ui/button";
 import { getAnswersForInterview } from "../../../../../lib/db/queries/answers";
+import { computeOverallRating } from "../../../../../lib/feedback";
 
 async function Feedback({ params }: { params: Promise<{ interviewId: string }> }) {
   const { interviewId } = await params;
   const feedback = await getAnswersForInterview(interviewId);
 
-  const ratedAnswers = feedback.filter((item) => item.rating !== null);
-  const overallRating =
-    ratedAnswers.length > 0
-      ? Math.round(
-          (ratedAnswers.reduce((sum, item) => sum + (item.rating ?? 0), 0) / ratedAnswers.length) * 10
-        ) / 10
-      : null;
+  const overallRating = computeOverallRating(feedback.map((item) => item.rating));
 
   return (
     <div className="p-10">

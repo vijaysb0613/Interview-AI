@@ -8,6 +8,10 @@
     "start": "next start",
     "lint": "next lint",
     "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:e2e": "playwright test",
+    "test:e2e:seed": "tsx scripts/seed-test-db.ts",
     "db:push": "npx drizzle-kit push",
     "db:generate": "npx drizzle-kit generate",
     "db:migrate": "npx drizzle-kit migrate",
@@ -40,16 +44,27 @@
     "zod": "^3.24.1"
   },
   "devDependencies": {
+    "@clerk/testing": "^2.2.13",
+    "@playwright/test": "^1.62.0",
+    "@testing-library/dom": "^10.4.0",
+    "@testing-library/jest-dom": "^6.6.3",
+    "@testing-library/react": "^16.1.0",
+    "@testing-library/user-event": "^14.5.2",
     "@types/node": "^22.10.2",
     "@types/react": "^18.3.31",
     "@types/react-dom": "^18.3.7",
+    "@vitejs/plugin-react": "^4.3.4",
     "drizzle-kit": "^0.31.10",
     "eslint": "^8",
     "eslint-config-next": "15.5.22",
     "eslint-config-prettier": "^9.1.0",
+    "jsdom": "^25.0.1",
     "postcss": "^8",
     "prettier": "^3.4.2",
     "tailwindcss": "^3.4.1",
-    "typescript": "5.7.2"
+    "tsx": "^4.19.2",
+    "typescript": "5.7.2",
+    "vite-tsconfig-paths": "^5.1.4",
+    "vitest": "^2.1.8"
   }
 }

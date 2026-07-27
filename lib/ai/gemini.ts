@@ -22,7 +22,29 @@ function stripJsonFence(text: string): string {
   return text.replace(/```json/g, "").replace(/```/g, "").trim();
 }
 
+/**
+ * Gemini is called server-side, so a browser-level network mock (e.g.
+ * Playwright's page.route()) can never intercept it - these calls don't
+ * go through the browser at all. E2E runs opt into this instead via
+ * E2E_MOCK_GEMINI, keyed off prompt content since question-generation and
+ * feedback prompts need different canned shapes.
+ */
+function getMockResponse(prompt: string): unknown {
+  if (prompt.includes("interviewQuestions")) {
+    return {
+      interviewQuestions: [
+        { question: "What is a closure?", answer: "A function bound to its lexical scope." },
+      ],
+    };
+  }
+  return { rating: 8, feedback: "Solid answer with room to elaborate on edge cases." };
+}
+
 export async function generateJson(prompt: string): Promise<unknown> {
+  if (process.env.E2E_MOCK_GEMINI === "true") {
+    return getMockResponse(prompt);
+  }
+
   const chatSession = getModel().startChat({ generationConfig, history: [] });
   const result = await chatSession.sendMessage(prompt);
   const raw = stripJsonFence(result.response.text());
