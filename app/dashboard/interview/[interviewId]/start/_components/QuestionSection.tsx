@@ -1,11 +1,19 @@
 import { Lightbulb, Volume2 } from "lucide-react";
 import React from "react";
 
-function QuestionSection({ MockInterviewQuestion, activeQuestionIndex, onSelectQuestion }) {
-  console.log("Received MockInterviewQuestion:", MockInterviewQuestion);
-  console.log("Active Index:", activeQuestionIndex);
+interface MockInterviewQuestionItem {
+  question: string;
+  answer?: string;
+}
 
-  const TextToSpeech = (text) => {
+interface QuestionSectionProps {
+  MockInterviewQuestion: MockInterviewQuestionItem[];
+  activeQuestionIndex: number;
+  onSelectQuestion: (index: number) => void;
+}
+
+function QuestionSection({ MockInterviewQuestion, activeQuestionIndex, onSelectQuestion }: QuestionSectionProps) {
+  const TextToSpeech = (text: string) => {
     if ("speechSynthesis" in window) {
       const speech = new SpeechSynthesisUtterance(text);
       window.speechSynthesis.speak(speech);

@@ -36,7 +36,9 @@
     "uuid": "^11.0.3"
   },
   "devDependencies": {
-    "@types/react": "18.3.14",
+    "@types/node": "^22.10.2",
+    "@types/react": "^18.3.31",
+    "@types/react-dom": "^18.3.7",
     "drizzle-kit": "^0.31.10",
     "eslint": "^8",
     "eslint-config-next": "15.5.22",
